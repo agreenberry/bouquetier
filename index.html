@@ -1,12 +1,15 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Bouquetier</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Pinyon+Script&family=Sorts+Mill+Goudy:ital@0;1&display=swap">
 <style>
 /* Layout: a specimen bench. The bouquet on a white card at left, the florist's recipe card at right, a row of sister posies beneath. */
-/* TWEAK light theme: --mist page background, --card panels, --ink text, --ink-soft secondary text, --rule borders, --chip unselected chips, --delph-text buttons / script text / selected chips, --blush stage card shadow. */
-/* TWEAK fonts: the --f-* variables. Any font named there must also be loaded by the Google Fonts <link> above. */
 :root{
   --mist:#F6F8FC; --card:#FFFFFF; --ink:#2B3046; --ink-soft:#5A6278; --rule:#DCE3F2; --chip:#EEF2FA;
   --delph:#8BA0D2; --delph-text:#4E66A3; --cosmos-text:#B5476A; --fern-text:#4A6B42; --poppy-text:#B04A2C; --blush:#F3C3C4;
@@ -16,7 +19,6 @@
   --f-fig:'Cormorant Garamond', Garamond, Georgia, serif;
   --f-script:'Pinyon Script', 'Snell Roundhand', cursive;
 }
-/* TWEAK dark theme: the same variables, defined twice (this block follows the OS setting, the next one a forced data-theme="dark"). Change both. */
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --mist:#141824; --card:#1C2131; --ink:#E7EBF5; --ink-soft:#A9B2C8; --rule:#323A52; --chip:#252B3E;
   --delph:#8BA0D2; --delph-text:#AFC0EA; --cosmos-text:#EFA2B8; --fern-text:#A6C394; --poppy-text:#F0936D; --blush:#5A3E4A; color-scheme:dark}}
@@ -26,16 +28,13 @@
 
 *{box-sizing:border-box}
 body{background:var(--mist);color:var(--ink);font:0.8125rem/1.5 var(--f-body)}
-/* TWEAK page width: max-width. */
 .wrap{max-width:74rem;margin:0 auto;padding-inline:1.25rem;padding-block:1.5rem 3rem;display:grid;gap:1.25rem}
 header{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem 1rem;border-bottom:1px solid var(--rule);padding-bottom:.6rem}
 h1{font:400 1.9rem/1.1 var(--f-display);margin:0;letter-spacing:.01em}
 .sub{font:1.25rem/1 var(--f-script);color:var(--delph-text)}
 header p{margin:0;flex-basis:100%;color:var(--ink-soft);max-width:68ch}
-/* TWEAK bouquet / panel column split: 1.55fr vs 1fr. The 56rem on the next line is where it stacks into one column. */
 .main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.25rem;align-items:start}
 @media (max-width:56rem){.main{grid-template-columns:minmax(0,1fr)}}
-/* TWEAK bouquet card: box-shadow is the two offset layers behind it (4px in --rule, 8px in --blush). */
 .stage{background:var(--card);border:1px solid var(--rule);box-shadow:4px 4px 0 var(--rule),8px 8px 0 var(--blush);padding:.75rem .75rem .5rem;min-width:0}
 .stage svg{display:block;width:100%;height:auto}
 .caption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline;border-top:1px solid var(--rule);padding-top:.4rem;margin-top:.25rem}
@@ -86,7 +85,6 @@ button:focus-visible,.seedrow input:focus-visible,.thumb:focus-visible{outline:2
 .checks .v{font:600 .82rem var(--f-fig);font-variant-numeric:tabular-nums}
 .gallery{display:grid;gap:.5rem}
 .left{display:grid;gap:1rem;min-width:0}
-/* TWEAK sister posies per row: repeat(6,...). The number generated is length:6 in render(), and the "Six more" label is in the HTML. */
 .thumbs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.5rem}
 @media (max-width:40rem){.thumbs{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .thumb{background:var(--card);border:1px solid var(--rule);padding:.25rem;cursor:pointer;display:grid;gap:.1rem;color:var(--ink-soft);font:600 .72rem var(--f-fig);text-align:center}
@@ -103,7 +101,6 @@ button:focus-visible,.seedrow input:focus-visible,.thumb:focus-visible{outline:2
 .copied{font-size:.75rem;color:var(--fern-text)}
 textarea#svgout{width:100%;height:6rem;font:.7rem ui-monospace,monospace;background:var(--mist);color:var(--ink);border:1px solid var(--rule)}
 /* growth animation: wrappers carry no transform attribute, so CSS transforms are safe */
-/* TWEAK animation speed: the .9s / .8s / .9s durations below. Start times per role are delayBase in generate(). */
 .anim .stem{stroke-dasharray:1;animation:draw .9s ease-out var(--d) both}
 .anim .grow{transform-box:fill-box;transform-origin:50% 100%;animation:grow .8s cubic-bezier(.2,.7,.3,1) var(--d) both}
 .anim .open{transform-box:fill-box;transform-origin:50% 50%;animation:open .9s cubic-bezier(.2,.7,.3,1) var(--d) both}
@@ -112,6 +109,8 @@ textarea#svgout{width:100%;height:6rem;font:.7rem ui-monospace,monospace;backgro
 @keyframes open{from{transform:scale(.15) rotate(-30deg);opacity:.2}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.anim *{animation:none!important}}
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <header>
@@ -154,11 +153,11 @@ textarea#svgout{width:100%;height:6rem;font:.7rem ui-monospace,monospace;backgro
 
   <section class="box">
     <h2>The method</h2>
-    <!-- NOTE: this text only describes the rules; editing it does not change behaviour. The pass/miss results are filled in by render(). -->
     <ul class="method">
-      <li data-rule="order"><b>Order of placement.</b> Greenery sets the outline, line flowers set height and width, the focal bloom goes in at the visual centre, secondary blooms ring it, filler softens the gaps, accents go in last. <span class="live"></span></li>
+      <li data-rule="order"><b>Order of placement.</b> Greenery sets the outline, line flowers set height and width, the focal bloom goes in at the visual centre, secondary blooms ring it, filler softens the gaps, then small sprigs are tucked into any space still showing, accents go in last. <span class="live"></span></li>
       <li data-rule="odd"><b>Odd numbers.</b> Every variety comes in ones, threes, fives or sevens, except the focal group, which is built for depth instead. <span class="live"></span></li>
       <li data-rule="focal"><b>The focal group.</b> Light: the main bloom and one small one. Full: the main bloom, a partner about three-quarters its size below it on one side, and one small one lower on the other side, drawn in close to the group but never directly underneath. The three make a loose triangle: no corner sharper than 30° or wider than 115°. Heavy: the main bloom, two full-size partners (one set well apart), two small ones placed diagonally (one high, and one in a consistent pocket just out from the main bloom and a little below it, above the far partner so it stays in view), and a third smaller one just under the main bloom to fill the gap between the lower partners. Small blooms are tucked behind the main one, a shade deeper, peeking out. <span class="live"></span></li>
+      <li><b>Round means round.</b> The round posy fills a dome that sits on its stems, rather than fanning out from the ribbon. Greenery tips may poke just past the dome's edge.</li>
       <li data-rule="balance"><b>Balance.</b> The focal group is centred on the main bloom's line. Each secondary bloom, accent and filler then goes wherever it best evens out the weight left and right, so neither side is left bare. <span class="live"></span></li>
       <li data-rule="size"><b>Size steps down outward.</b> The largest bloom sits lowest and most central; line flowers and accents work the edges. <span class="live"></span></li>
       <li data-rule="ratio"><b>60 · 30 · 10.</b> The key colour leads, a supporting colour follows, an accent stays near a tenth. White and green are neutrals. <span class="live"></span></li>
@@ -176,12 +175,10 @@ function hashStr(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function rngFrom(seed){const f=mulberry32(hashStr(seed));return{r:f,range:(a,b)=>a+(b-a)*f(),int:(a,b)=>Math.floor(a+(b-a+1)*f()),pick:a=>a[Math.floor(f()*a.length)],chance:p=>f()<p,
   weighted:(items,w)=>{let t=w.reduce((s,x)=>s+x,0),x=f()*t;for(let i=0;i<items.length;i++){x-=w[i];if(x<=0)return items[i]}return items[items.length-1]}}}
-// TWEAK seed names used by "Draw another".
 const WORDS=['meadow','larkspur','tussie','sprig','bower','hedgerow','orchard','thistle','clover','sorrel','primrose','foxglove','bramble','posy','nosegay','garland','herbarium','dewfall'];
 function freshSeed(r){r=r||Math.random;return WORDS[Math.floor(r()*WORDS.length)]+'-'+(100+Math.floor(r()*900))}
 
 /* ---------- colour ---------- */
-// TWEAK outline tint: INK is mixed into every outline (see line() and deepOf()).
 const INK='#2B3046';
 function hx(h){h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))}
 function toHex(c){return'#'+c.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('')}
@@ -189,8 +186,6 @@ function mix(a,b,t){const A=hx(a),B=hx(b);return toHex(A.map((v,i)=>v+(B[i]-v)*t
 function hue(h){const[r,g,b]=hx(h).map(v=>v/255),mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;if(d<.02)return null;let H;
   if(mx===r)H=((g-b)/d)%6;else if(mx===g)H=(b-r)/d+2;else H=(r-g)/d+4;H*=60;return H<0?H+360:H}
 function hueDist(a,b){const d=Math.abs(a-b)%360;return d>180?360-d:d}
-// TWEAK flower palette. hex = petal colour · deep = outline/shade colour (optional, otherwise derived by deepOf())
-// · w = how often the colour is chosen as key when Key colour is "Any". A new row gets its own chip in the UI automatically.
 const BLOOMS=[
   {id:'delphinium',name:'Delphinium',hex:'#8BA0D2',deep:'#4E66A3',w:2.2},
   {id:'larkspur',name:'Larkspur',hex:'#B7A9D9',w:1},
@@ -201,28 +196,22 @@ const BLOOMS=[
   {id:'butter',name:'Butter',hex:'#F4D57E',w:.8},
   {id:'crimson',name:'Crimson bud',hex:'#A3303E',w:.6}];
 const WHITE={id:'white',name:'Petal white',hex:'#FFFFFF',deep:'#9AA6C0'};
-// TWEAK greens: sage and fern are leaf fills, stem is the dark green for stalks and leaf outlines.
 const G={sage:'#A3B48A',fern:'#6E8A5A',stem:'#34503D'};
-// TWEAK .42 = how dark the derived shade is.
 function deepOf(c){return c.deep||mix(c.hex,INK,.42)}
-// TWEAK banned colour pairs, by BLOOMS id.
 const CLASH=[['poppy','cosmos'],['poppy','crimson'],['marigold','crimson']];
 function clashes(a,b){const x=a.id.split('-')[0],y=b.id.split('-')[0];return CLASH.some(([p,q])=>(x===p&&y===q)||(x===q&&y===p))}
 const HARMONIES={any:'Any',analogous:'Analogous',complementary:'Complementary',split:'Split-complementary',triadic:'Triadic',mono:'Monochrome'};
 
 function buildScheme(rng,harmony,keyId){
   const key=keyId!=='any'?BLOOMS.find(b=>b.id===keyId):rng.weighted(BLOOMS,BLOOMS.map(b=>b.w));
-  // TWEAK odds of each harmony when set to "Any" (weights in the same order as the names).
   if(harmony==='any')harmony=rng.weighted(['analogous','complementary','split','triadic','mono'],[3,3,2,1.5,1]);
   const hk=hue(key.hex);
   const others=BLOOMS.filter(b=>b!==key&&!clashes(b,key)).map(b=>({b,d:hueDist(hk,hue(b.hex))}));
-  // TWEAK .45 = how pale the "light" tint is (used when no supporting colour fits, and in Monochrome).
   const tint={id:key.id+'-light',name:key.name+', light',hex:mix(key.hex,'#FFFFFF',.45),deep:deepOf(key)};
   const shade={id:key.id+'-deep',name:key.name+', deep',hex:deepOf(key),deep:mix(deepOf(key),INK,.4)};
   let support,accent,note='';
   if(harmony==='mono'){support=tint;accent=shade;note='One hue at three values: the key, a light tint and a deep shade. White and green carry the rest.'}
   else{
-    // TWEAK 60 = max hue distance in degrees for a supporting colour. The four filters below are the hue windows for each harmony's accent.
     const near=others.filter(o=>o.d<=60).sort((a,b)=>a.d-b.d).map(o=>o.b);
     if(near.length)support=rng.pick(near.slice(0,2));else{support=tint;note=`Nothing in the palette sits within 60° of ${key.name}, so a light tint of it supports. `}
     let pool=others.filter(o=>o.b!==support&&!clashes(o.b,support));
@@ -234,7 +223,6 @@ function buildScheme(rng,harmony,keyId){
     else{accent={id:'fern-accent',name:'Fern green',hex:'#6E8A5A',deep:'#34503D'};
       note+=`The meadow palette has no ${HARMONIES[harmony].toLowerCase()} partner for ${key.name}. Its true opposite is green, so the accents are green and the foliage carries the contrast.`}
   }
-  // TWEAK .22 = paleness of the "soft" key colour used on some secondary blooms and filler.
   return{harmony,key,keyLight:{...key,id:key.id+'-soft',name:key.name+', soft',hex:mix(key.hex,'#FFFFFF',.22)},support,accent,note};
 }
 
@@ -244,91 +232,61 @@ const f2=n=>Math.round(n*100)/100;
 function d(s,...v){return s.reduce((a,str,i)=>a+str+(i<v.length?f2(v[i]):''),'')}
 function qpt(p0,c,p1,t){const u=1-t;return{x:u*u*p0.x+2*u*t*c.x+t*t*p1.x,y:u*u*p0.y+2*u*t*c.y+t*t*p1.y}}
 function qtan(p0,c,p1,t){const x=2*(1-t)*(c.x-p0.x)+2*t*(p1.x-c.x),y=2*(1-t)*(c.y-p0.y)+2*t*(p1.y-c.y);return Math.atan2(y,x)/D2R}
-// TWEAK 95 = the furthest any leaf, bud or head may point from upright, in degrees. Large angle changes elsewhere get capped here.
 const clampUp=a=>Math.max(-95,Math.min(95,a));
-// One petal pointing straight up from (0,0): length L, half-width w. Every flower rotates copies of this into place.
-// TWEAK petal silhouettes (numbers are fractions of L and w; a change applies to every flower using that tip):
-//   'point' = leaf shape, widest near the base · 'notch' = three-toothed cosmos tip · default 'round' = widest near the tip (1.12 at 86% of the length)
 function petalD(L,w,tip){
   if(tip==='point')return d`M0 0C${w} ${-L*.25} ${w*.7} ${-L*.8} 0 ${-L}C${-w*.7} ${-L*.8} ${-w} ${-L*.25} 0 0Z`;
   if(tip==='notch')return d`M0 0C${w*.9} ${-L*.2} ${w*1.05} ${-L*.72} ${w*.55} ${-L*.97}L${w*.22} ${-L*.86}L0 ${-L}L${-w*.22} ${-L*.86}L${-w*.55} ${-L*.97}C${-w*1.05} ${-L*.72} ${-w*.9} ${-L*.2} 0 0Z`;
   return d`M0 0C${w*.95} ${-L*.12} ${w*1.12} ${-L*.86} 0 ${-L}C${-w*1.12} ${-L*.86} ${-w*.95} ${-L*.12} 0 0Z`;
 }
-// P(path, fill, stroke, strokeWidth, class, transform) and CIR(x, y, radius, fill, stroke, strokeWidth, class).
-// In the flower code below, the number right after the stroke colour is the outline thickness.
 const P=(dd,fill,stroke,sw,cls,tr)=>`<path class="${cls}" d="${dd}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"${tr?` transform="${tr}"`:''}/>`;
 const CIR=(x,y,r,fill,stroke,sw,cls)=>`<circle class="${cls}" cx="${f2(x)}" cy="${f2(y)}" r="${f2(r)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
-// TWEAK .38 = how dark outlines are relative to their fill.
 function line(fill){return mix(fill,INK,.38)}
 
 /* ---------- bloom heads (local coordinates, centre at 0,0) ---------- */
-// TWEAK sepals (green leaves behind peony, ranunculus, anemone): -105/105 = angles · R*.55 = length · R*.17 = width · range(-12,12) = jitter.
 function sepals(R,rng){let s='';for(const a of[-105,105])s+=P(petalD(R*.55,R*.17,'point'),G.fern,G.stem,.5,'leaf',`rotate(${f2(a+rng.range(-12,12))})`);return s}
-// TWEAK centre colour for cosmos, chosen from the petal hue: butter/marigold get dark green or crimson, white gets yellow, blues/purples (hue 180-300) get yellow or orange, the rest dark green or yellow.
 function centreFor(c,rng){const h=hue(c.hex);if(c.id.startsWith('butter')||c.id.startsWith('marigold'))return rng.pick([G.stem,'#A3303E']);
   if(h===null)return'#F4D57E';if(h>180&&h<300)return rng.pick(['#F4D57E','#EFA33E']);return rng.pick([G.stem,'#F4D57E'])}
-// Bloom heads. R = bloom radius, c = colour. Nearly every number is a fraction of R, so it scales with the bloom.
-// mix(c.hex,'#FFFFFF',t): raise t for paler petals, lower it for more saturated ones.
-// CAUTION: adding or removing an rng.* call (or changing a loop count that contains one) changes what every existing seed draws. Plain numbers are safe.
-// NEW FLOWER: add a function here, add it to TOPDOWN if face-on, add a label in NAMES, add it to a pick list in generate().
 const HEADS={
-  // PEONY. Next line: four rings of petals, each [petal count, length, width, lightness], outermost first. Add a row for a fuller bloom; raise the last number for a paler centre.
-  // range(.88,1.06) = raggedness of petal length · range(-8,8) = angle jitter · last line: i<7 stamen dots, spread R*.1, size R*.035.
   peony(R,c,rng){let s=sepals(R,rng);const dp=deepOf(c);
     [[9,1,.58,0],[8,.78,.52,.15],[7,.56,.46,.28],[5,.34,.38,.4]].forEach(([n,lf,wf,lt])=>{const off=rng.range(0,360);
       for(let i=0;i<n;i++){const L=R*lf*rng.range(.88,1.06),fill=mix(c.hex,'#FFFFFF',Math.max(0,lt+rng.range(-.06,.06)));
         s+=P(petalD(L,L*wf,'round'),fill,mix(dp,fill,.2),.6,'petal',`rotate(${f2(off+i*360/n+rng.range(-8,8))})`)}});
     for(let i=0;i<7;i++){const a=rng.range(0,6.283),r=rng.range(0,R*.1);s+=CIR(Math.cos(a)*r,Math.sin(a)*r,R*.035,'#F4D57E','#C99A3A',.4,'centre')}
     return s},
-  // RANUNCULUS. k<6 = number of rings · 1-k*.15 = shrink per ring · 9-k = petals per ring (min 4) · k*37 = twist between rings.
-  // base colour: outer three rings get lighter (.04+k*.07), inner rings get darker ((k-2)*.12) · L*.72 = petal width · R*.08 = centre dot.
   ranunculus(R,c,rng){let s=sepals(R,rng);const dp=deepOf(c);
     for(let k=0;k<6;k++){const lf=1-k*.15,n=Math.max(4,9-k),off=k*37+rng.range(0,20);
       const base=k<3?mix(c.hex,'#FFFFFF',.04+k*.07):mix(c.hex,dp,(k-2)*.12);
       for(let i=0;i<n;i++){const L=R*lf*rng.range(.94,1.04),fill=mix(base,'#FFFFFF',rng.range(0,.07));
         s+=P(petalD(L,L*.72,'round'),fill,mix(dp,fill,.2),.55,'petal',`rotate(${f2(off+i*360/n)})`)}}
     return s+CIR(0,0,R*.08,mix(G.fern,c.hex,.3),G.stem,.5,'centre')},
-  // ANEMONE. Six petals: i<6 and i*60 must multiply to 360 · range(.92,1.04) = length · L*.78 = width · range(0,.14) = tint variation.
-  // Veins: two per petal at -.18/.18, from 30% to 82% of the petal. Eye: R*.26 dark disc, R*.12 highlight, then a ring of 20 dots at R*.34, size R*.03 (20 x 18 = 360).
   anemone(R,c,rng){let s=sepals(R,rng);const dp=deepOf(c),off=rng.range(0,60);
     for(let i=0;i<6;i++){const a=off+i*60+rng.range(-7,7),L=R*rng.range(.92,1.04),fill=mix(c.hex,'#FFFFFF',rng.range(0,.14));
       s+=P(petalD(L,L*.78,'round'),fill,mix(dp,fill,.2),.6,'petal',`rotate(${f2(a)})`);
       for(const v of[-.18,.18])s+=P(d`M0 ${-L*.3}Q${L*v} ${-L*.6} ${L*v*1.3} ${-L*.82}`,'none',mix(dp,fill,.5),.4,'vein',`rotate(${f2(a)})`)}
     const eye=c.id.startsWith('crimson')?G.stem:INK;s+=CIR(0,0,R*.26,eye,eye,.4,'centre')+CIR(0,0,R*.12,mix(eye,'#8BA0D2',.3),'none',0,'centre');
     for(let i=0;i<20;i++){const a=i*18*D2R;s+=CIR(Math.cos(a)*R*.34,Math.sin(a)*R*.34,R*.03,eye,'none',0,'centre')}return s},
-  // COSMOS (no sepals). Eight notched petals: i<8 and i*45 must multiply to 360 · L*.4 = width · three veins at -.12, 0, .12.
-  // Centre disc R*.2 (colour from centreFor), nine speckles within R*.13.
   cosmos(R,c,rng){let s='';const dp=deepOf(c),off=rng.range(0,45);
     for(let i=0;i<8;i++){const a=off+i*45+rng.range(-5,5),L=R*rng.range(.9,1.04),fill=mix(c.hex,'#FFFFFF',rng.range(0,.16));
       s+=P(petalD(L,L*.4,'notch'),fill,mix(dp,fill,.2),.55,'petal',`rotate(${f2(a)})`);
       for(const v of[-.12,0,.12])s+=P(d`M0 ${-L*.25}L${L*v} ${-L*.8}`,'none',mix(dp,fill,.45),.35,'vein',`rotate(${f2(a)})`)}
     const ctr=centreFor(c,rng);s+=CIR(0,0,R*.2,ctr,line(ctr),.5,'centre');
     for(let i=0;i<9;i++){const a=rng.range(0,6.283),r=rng.range(0,R*.13);s+=CIR(Math.cos(a)*r,Math.sin(a)*r,R*.025,line(ctr),'none',0,'centre')}return s},
-  // DAISY (no sepals). .6 = how far the colour is washed toward white (why daisies are always pale) · 16 petals: i<16 and i*22.5 · L*.16 = width.
-  // Yellow centre R*.24, 14 orange speckles within R*.18.
   daisy(R,c,rng){let s='';const pet=mix(c.hex,'#FFFFFF',.6),off=rng.range(0,22);
     for(let i=0;i<16;i++){const L=R*rng.range(.88,1.05);s+=P(petalD(L,L*.16,'round'),pet,mix(deepOf(c),pet,.35),.45,'petal',`rotate(${f2(off+i*22.5)})`)}
     s+=CIR(0,0,R*.24,'#F4D57E','#C99A3A',.5,'centre');
     for(let i=0;i<14;i++){const a=rng.range(0,6.283),r=rng.range(0,R*.18);s+=CIR(Math.cos(a)*r,Math.sin(a)*r,R*.025,'#EFA33E','none',0,'centre')}return s},
-  // TULIP (side view). Three hand-written paths: back petal, left front, right front. Coordinates are multiples of R; base at R*.5, tips at -R*.95 (up is negative).
-  // Tones: back = .25 darker, left = near the base colour, right = .18 lighter. Reshaping means editing the curve coordinates.
   tulip(R,c,rng){const dp=deepOf(c),back=mix(c.hex,dp,.25),f1=mix(c.hex,'#FFFFFF',rng.range(0,.08)),fr=mix(c.hex,'#FFFFFF',.18);
     return P(d`M0 ${R*.5}C${R*.55} ${R*.35} ${R*.5} ${-R*.55} ${R*.12} ${-R*.95}C0 ${-R*.75} 0 ${-R*.75} ${-R*.12} ${-R*.95}C${-R*.5} ${-R*.55} ${-R*.55} ${R*.35} 0 ${R*.5}Z`,back,line(back),.6,'petal')
       +P(d`M${R*.05} ${R*.55}C${-R*.6} ${R*.5} ${-R*.72} ${-R*.25} ${-R*.42} ${-R*.82}C${-R*.2} ${-R*.5} ${R*.02} ${-R*.2} ${R*.12} ${R*.1}Z`,f1,line(f1),.6,'petal')
       +P(d`M${-R*.05} ${R*.55}C${R*.6} ${R*.5} ${R*.72} ${-R*.25} ${R*.42} ${-R*.82}C${R*.2} ${-R*.5} ${-R*.02} ${-R*.2} ${-R*.12} ${R*.1}Z`,fr,line(fr),.6,'petal')}
 };
-// Face-on flowers: these get the perspective squash and lean less with their stems (see "TWEAK tilt and squash" in generate()).
 const TOPDOWN=new Set(['peony','ranunculus','anemone','cosmos','daisy']);
 
 /* ---------- forms that grow along a stem (global coordinates) ---------- */
-// LINE SPIRES. sz = spire size; florets run along the top half of the stem.
 function spike(b0,c0,t0,sz,col,rng,kind){let s='';
-  // VERONICA. n=30 ellipses · .52+.48*u = from 52% up the stem to the tip · (1-.65*u)*.34 = size and taper · z*1.3 = sideways scatter · u*.35 = paling toward the tip.
   if(kind==='veronica'){const n=30;for(let i=0;i<n;i++){const u=i/(n-1),t=.52+.48*u,p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),pr=(a+90)*D2R,z=sz*(1-.65*u)*.34,o=rng.range(-1,1)*z*1.3;
       const fill=mix(col.hex,'#FFFFFF',u*.35+rng.range(0,.08)),x=p.x+Math.cos(pr)*o,y=p.y+Math.sin(pr)*o;
       s+=`<ellipse class="petal" cx="${f2(x)}" cy="${f2(y)}" rx="${f2(z*.55)}" ry="${f2(z)}" fill="${fill}" stroke="${line(fill)}" stroke-width=".35" transform="rotate(${f2(a+90+rng.range(-25,25))} ${f2(x)} ${f2(y)})"/>`}return s}
-  // LARKSPUR. int(9,13) florets · (1-.6*u)*.42 = size and taper · u>.78 = top florets drawn as closed buds (lower it for more buds), greened by .3.
-  // Open florets: five petals (k<5 and k*72) · z*.62 = width · z*.22 = dark centre.
   const n=rng.int(9,13);
   for(let i=0;i<n;i++){const u=i/(n-1),t=.5+.5*u,p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),pr=(a+90)*D2R,side=i%2?1:-1,z=sz*(1-.6*u)*.42;
     const x=p.x+Math.cos(pr)*side*z*.5,y=p.y+Math.sin(pr)*side*z*.5;
@@ -336,73 +294,73 @@ function spike(b0,c0,t0,sz,col,rng,kind){let s='';
     else{const rot=rng.range(0,72);let g='';for(let k=0;k<5;k++){const fill=mix(col.hex,'#FFFFFF',rng.range(0,.15)+u*.18);g+=P(petalD(z,z*.62,'round'),fill,line(fill),.4,'petal',`rotate(${f2(rot+k*72)})`)}
       g+=CIR(0,0,z*.22,mix(deepOf(col),INK,.3),'none',0,'centre');s+=`<g transform="translate(${f2(x)} ${f2(y)})">${g}</g>`}}
   return s}
-// FILLER. Dot colour = scheme colour washed .35 toward white, or pure white with a #AEB8CC outline.
 function filler(x,y,R,col,rng,kind,dir){let s='';const dot=col?mix(col.hex,'#FFFFFF',.35):'#FFFFFF',st=col?line(dot):'#AEB8CC';
-  // YARROW. Eight spokes fanning from -160 degrees in steps of 20, then 34 dots in a flat-topped dome: r*.45 = flatness · R*.065 = dot size.
   if(kind==='yarrow'){const top={x,y:y-R*.25};for(let i=0;i<8;i++){const a=(-160+i*20+rng.range(-6,6))*D2R;s+=P(d`M${x} ${y+R*.2}L${top.x+Math.cos(a)*R*.7} ${top.y+Math.sin(a)*R*.35}`,'none',G.fern,.45,'stem')}
     for(let i=0;i<34;i++){const a=rng.range(Math.PI,2*Math.PI),r=Math.sqrt(rng.r())*R;s+=CIR(top.x+Math.cos(a)*r,top.y+Math.sin(a)*r*.45,R*.065,mix(dot,'#FFFFFF',rng.range(0,.2)),st,.3,'petal')}return s}
-  // BABY'S BREATH. int(3,4) branches spread by range(-55,55) · three twigs each (k<3) · int(3,5) dots per twig. Dot radius range(1.5,2.3) and scatter range(-3,3) are plain pixels, so they don't scale.
   const nb=rng.int(3,4);for(let b=0;b<nb;b++){const a=(dir-90+rng.range(-55,55))*D2R,L=R*rng.range(.6,1),ex=x+Math.cos(a)*L,ey=y+Math.sin(a)*L;
     s+=P(d`M${x} ${y}L${ex} ${ey}`,'none',G.fern,.45,'stem');
     for(let k=0;k<3;k++){const a2=a+rng.range(-.7,.7),L2=R*rng.range(.2,.38),cx=ex+Math.cos(a2)*L2,cy=ey+Math.sin(a2)*L2;s+=P(d`M${ex} ${ey}L${cx} ${cy}`,'none',G.fern,.35,'stem');
       for(let m=0;m<rng.int(3,5);m++)s+=CIR(cx+rng.range(-3,3),cy+rng.range(-3,3),rng.range(1.5,2.3),dot,st,.35,'petal')}}
   return s}
-// ACCENTS.
 function accentHead(R,c,rng,kind){let s='';const dp=deepOf(c);
-  // BERRIES. int(3,5) on an arc starting at -150 degrees · R*.55 = spread · R*.3 = berry size · R*.07 = white shine dot.
   if(kind==='berries'){const n=rng.int(3,5);for(let i=0;i<n;i++){const a=(-150+i*(120/(n-1||1)))*D2R,r=R*.55,x=Math.cos(a)*r,y=Math.sin(a)*r;
       s+=P(d`M0 ${R*.4}L${x} ${y}`,'none',G.stem,.45,'stem')+CIR(x,y,R*.3,mix(c.hex,'#FFFFFF',rng.range(0,.1)),line(c.hex),.5,'berry')+CIR(x-R*.1,y-R*.1,R*.07,'#FFFFFF','none',0,'shine')}return s}
-  // BUDS. One bud R*1.4 long and R*.5 wide, with two green sepals at -28/28 degrees.
   if(kind==='buds'){s+=P(petalD(R*1.4,R*.5,'point'),mix(c.hex,'#FFFFFF',.06),dp,.5,'bud');for(const a of[-28,28])s+=P(petalD(R*.75,R*.22,'point'),G.fern,G.stem,.4,'leaf',`rotate(${a})`);return s}
-  // FORGET-ME-NOTS. Three florets R*.62 apart, middle one raised R*.45 · five petals each, R*.4 long, R*.3 wide · yellow centre R*.1.
   for(let j=0;j<3;j++){const ox=(j-1)*R*.62,oy=j===1?-R*.45:0,rot=rng.range(0,72);let g='';
     for(let k=0;k<5;k++){const fill=mix(c.hex,'#FFFFFF',rng.range(0,.15));g+=P(petalD(R*.4,R*.3,'round'),fill,line(fill),.4,'petal',`rotate(${f2(rot+k*72)})`)}
     s+=`<g transform="translate(${f2(ox)} ${f2(oy)})">${g}${CIR(0,0,R*.1,'#F4D57E','none',0,'centre')}</g>`}return s}
-// GREENERY. Leaf sizes here are plain pixels, not fractions of R. The .9 on this line = stalk thickness.
-function greenery(b0,c0,t0,rng,kind){let s=P(d`M${b0.x} ${b0.y}Q${c0.x} ${c0.y} ${t0.x} ${t0.y}`,'none',G.stem,.9,'stem');
-  // FERN. int(11,15) leaflet pairs · 26*(1-.75*u)+4 = leaflet length from base to tip · L*.26 = width · sd*58 = angle off the stalk.
+function wisp(b0,c0,t0,R,col,rng){let s='';const n=rng.int(4,6),pet=col?col.hex:'#FFFFFF',ctr=col?mix(col.hex,INK,.35):'#F4D57E';
+  const bloom=(x,y,r)=>{let g='';const rot=rng.range(0,72);for(let k=0;k<5;k++){const f=mix(pet,'#FFFFFF',rng.range(0,.15));g+=P(petalD(r,r*.7,'round'),f,line(f),.3,'petal',`rotate(${f2(rot+k*72)})`)}
+    return`<g transform="translate(${f2(x)} ${f2(y)})">${g}${CIR(0,0,r*.28,ctr,'none',0,'centre')}</g>`};
+  for(let i=0;i<n;i++){const t=.55+.42*i/(n-1),p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),side=i%2?1:-1,ang=clampUp(a+90+side*rng.range(35,60))-90,L=R*rng.range(.6,1.1);
+    const e={x:p.x+Math.cos(ang*D2R)*L,y:p.y+Math.sin(ang*D2R)*L};
+    s+=P(d`M${p.x} ${p.y}L${e.x} ${e.y}`,'none',G.fern,.4,'stem')+bloom(e.x,e.y,R*rng.range(.2,.27))}
+  return s+bloom(t0.x,t0.y,R*.26)}
+function greenery(b0,c0,t0,rng,kind,cu=clampUp){ /* cu: how far leaves may turn from upright (drapes pass a looser one) */let s=P(d`M${b0.x} ${b0.y}Q${c0.x} ${c0.y} ${t0.x} ${t0.y}`,'none',G.stem,.9,'stem');
   if(kind==='fern'){const n=rng.int(11,15);for(let i=0;i<n;i++){const u=i/(n-1),t=.32+.66*u,p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),L=26*(1-.75*u)+4;
-      for(const sd of[-1,1])s+=P(petalD(L,L*.26,'point'),mix(G.fern,G.sage,rng.range(0,.4)),G.stem,.4,'leaf',`translate(${f2(p.x)} ${f2(p.y)}) rotate(${f2(clampUp(a+90+sd*58))})`)}
-    return s+P(petalD(8,2.5,'point'),G.fern,G.stem,.4,'leaf',`translate(${f2(t0.x)} ${f2(t0.y)}) rotate(${f2(clampUp(qtan(b0,c0,t0,1)+90))})`)}
-  // EUCALYPTUS. int(7,10) round leaves on alternating sides · 10*(1-.45*u) = radius · r*.86 = roundness · colour = sage blended up to .3 toward #DCE3F2.
+      for(const sd of[-1,1])s+=P(petalD(L,L*.26,'point'),mix(G.fern,G.sage,rng.range(0,.4)),G.stem,.4,'leaf',`translate(${f2(p.x)} ${f2(p.y)}) rotate(${f2(cu(a+90+sd*58))})`)}
+    return s+P(petalD(8,2.5,'point'),G.fern,G.stem,.4,'leaf',`translate(${f2(t0.x)} ${f2(t0.y)}) rotate(${f2(cu(qtan(b0,c0,t0,1)+90))})`)}
   if(kind==='eucalyptus'){const n=rng.int(7,10);for(let i=0;i<n;i++){const u=i/(n-1),t=.3+.7*u,p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),pr=(a+90)*D2R,sd=i%2?1:-1,r=10*(1-.45*u);
       const x=p.x+Math.cos(pr)*sd*r*.9,y=p.y+Math.sin(pr)*sd*r*.9,fill=mix(G.sage,'#DCE3F2',rng.range(0,.3));
       s+=`<ellipse class="leaf" cx="${f2(x)}" cy="${f2(y)}" rx="${f2(r)}" ry="${f2(r*.86)}" fill="${fill}" stroke="${mix(G.stem,fill,.3)}" stroke-width=".45"/>`}return s}
-  // WILLOW. int(5,7) leaves · 34-14*u = length · L*.17 = width · sd*34 = angle off the stalk.
   const n=rng.int(5,7);for(let i=0;i<n;i++){const u=i/(n-1),t=.35+.63*u,p=qpt(b0,c0,t0,t),a=qtan(b0,c0,t0,t),sd=i%2?1:-1,L=34-14*u;
-    s+=P(petalD(L,L*.17,'point'),mix(G.sage,G.fern,rng.range(0,.5)),G.stem,.45,'leaf',`translate(${f2(p.x)} ${f2(p.y)}) rotate(${f2(clampUp(a+90+sd*34))})`)}return s}
+    s+=P(petalD(L,L*.17,'point'),mix(G.sage,G.fern,rng.range(0,.5)),G.stem,.45,'leaf',`translate(${f2(p.x)} ${f2(p.y)}) rotate(${f2(cu(a+90+sd*34))})`)}return s}
 
 /* ---------- arrangement ---------- */
-// The point where all stems meet (under the ribbon). The picture is auto-cropped, so moving it changes little.
 const B={x:320,y:612};
-// TWEAK bouquet shapes. a = fan angle in degrees left/right of vertical · env = how far stems reach in px at angle t (the silhouette)
-// · focal.t = the main bloom's angle, focal.f = how far up the reach it sits (0-1). A new entry gets its own chip.
+// A round posy is a dome sitting on its stems: a circle of radius R centred D above the ribbon.
+// Rays from the ribbon enter the dome at `near` and leave it at `far`; flowers are placed between the two.
+function dome(D,R){const cut=t=>{const s=D*Math.sin(Math.abs(t)*D2R),c=D*Math.cos(t*D2R);return s>=R?[c,c]:[c-Math.sqrt(R*R-s*s),c+Math.sqrt(R*R-s*s)]};
+  return{near:t=>cut(t)[0],env:t=>cut(t)[1]}}
 const SHAPES={
-  posy:{label:'Round posy',a:[-64,64],env:()=>330,focal:{t:0,f:.56}},
+  posy:{label:'Round posy',a:[-54,54],...dome(235,200),focal:{t:0,f:.45},greenReach:[.92,1.12]},
   hogarth:{label:'Asymmetric',a:[-32,72],env:t=>t<0?330+130*(-t/32):330-80*(t/72),focal:{t:9,f:.52}},
-  spray:{label:'Tall spray',a:[-42,42],env:t=>440-3.4*Math.abs(t),focal:{t:0,f:.46}}};
-// TWEAK fullness. line/filler/accent/green = stem counts (keep them odd or the "odd numbers" check fails)
-// · sec = possible secondary plans, e.g. [[3,3],[5]] = two varieties of 3, or one of 5 · scale = overall size · bloom = shrinks the big blooms.
-// CAUTION: focal only works as 1, 2 or 4, and the focal layout in generate() branches on the names light / full / heavy.
+  // tall spray: a narrow column. Everything sits within 17° of upright, starts 80px above the ribbon and runs
+  // up to 545px, so flowers spread up the height rather than out to the sides. The focal group is stood up too:
+  // each offset from the main bloom is turned toward vertical (narrow: sideways ×0.6, upright ×1.35, same distance).
+  spray:{label:'Tall spray',a:[-17,17],near:()=>80,env:t=>545-6*Math.abs(t),focal:{t:0,f:.34},stand:{x:.6,y:1.35},greenReach:[.8,1.05]}};
 const FLUSH={
-  sprig:{label:'Sprig',focal:[1],sec:[[3]],line:1,filler:1,accent:3,green:3,scale:.78},
+  sprig:{label:'Sprig',focal:[1],sec:[[3]],line:1,filler:1,accent:3,green:3,scale:.78,reach:.55}, // reach: a small, tight posy, not a full-size outline with a few flowers in it
   light:{label:'Light',focal:[1],sec:[[3]],line:3,filler:3,accent:3,green:5,scale:.9},
-  full:{label:'Full',focal:[2],sec:[[3,3],[5]],line:3,filler:5,accent:5,green:7,scale:1},
-  heavy:{label:'Heavy',focal:[4],sec:[[5,3],[3,5]],line:5,filler:7,accent:7,green:9,scale:1.05,bloom:.86}};
-// TWEAK lower = big blooms may overlap more.
+  full:{label:'Full',focal:[2],sec:[[3,3],[5]],line:3,filler:7,accent:7,green:9,scale:1,wisps:7,drapes:2},
+  heavy:{label:'Heavy',focal:[4],wisps:7,drapes:2,sec:[[5,3],[3,5]],line:5,filler:7,accent:7,green:9,scale:1.05,bloom:.86}};
 const MAIN_K=.94; // main blooms (focal + secondary) may overlap by at most ~6% of their combined radii
-// Display names for the recipe card. A new flower needs an entry here.
 const NAMES={peony:'Peony',ranunculus:'Ranunculus',anemone:'Anemone',cosmos:'Cosmos',daisy:'Daisy',tulip:'Tulip',larkspur:'Larkspur spire',veronica:'Veronica spire',
-  breath:"Baby's breath",yarrow:'Yarrow',berries:'Berries',buds:'Buds',forgetme:'Forget-me-nots',fern:'Fern',eucalyptus:'Eucalyptus',willow:'Willow'};
+  breath:"Baby's breath",yarrow:'Yarrow',berries:'Berries',buds:'Buds',forgetme:'Forget-me-nots',tiny:'tiny blooms',sprays:'Flower sprays',leaves:'leaf sprigs',fern:'Fern',eucalyptus:'Eucalyptus',willow:'Willow'};
 
 function generate(o){
-  const rng=rngFrom(o.seed),sh=SHAPES[o.shape],fl=FLUSH[o.flush],sc=fl.scale;
+  const rng=rngFrom(o.seed),sh=SHAPES[o.shape],fl={...FLUSH[o.flush]},sc=fl.scale;
+  if(o.shape==='spray'&&fl.reach)fl.reach=Math.max(fl.reach,.85); // a tall column is already narrow; shrinking it more would crowd the blooms
+  // a round posy is held tight: stems stay short so the blooms gather into a ball instead of being pushed out
+  if(o.shape==='posy')fl.reach={sprig:.55,light:.66,full:.72,heavy:.78}[o.flush];
   const S=buildScheme(rng,o.harmony,o.key);
   const placed=[],items=[];
+  // distance from the ribbon along angle th, f of the way from where the shape begins (near) to its outline (env)
+  const reach=(th,f)=>{const n=sh.near?sh.near(th):0;return(n+(sh.env(th)-n)*f)*sc*(fl.reach||1)};
   // wa > 0: also weigh the spot for balance, choosing among several clear spots the one that evens things out
   function spot(n,i,fr,r,k,pad=0,wa=0){const[a0,a1]=sh.a;let best=null,bs=-1;const oks=[];
     for(let tr=0;tr<(wa?120:60)&&oks.length<(wa?6:1);tr++){const th=!wa&&tr<20?a0-pad+(a1-a0+2*pad)*(i+rng.r())/n:rng.range(a0-pad,a1+pad);
-      const rho=sh.env(th)*sc*rng.range(fr[0],fr[1]),x=B.x+rho*Math.sin(th*D2R),y=B.y-rho*Math.cos(th*D2R);
+      const rho=reach(th,rng.range(fr[0],fr[1])),x=B.x+rho*Math.sin(th*D2R),y=B.y-rho*Math.cos(th*D2R);
       let m=Infinity;for(const p of placed){const q=Math.hypot(p.x-x,p.y-y)/(p.r+r);if(q<m)m=q}
       if(m>=k)oks.push({x,y,th,rho});else if(m>bs){bs=m;best={x,y,th,rho}}}
     if(oks.length)best=wa?oks.reduce((b,c)=>Math.abs(bal+wa*(c.x-axis))<Math.abs(bal+wa*(b.x-axis))?c:b):oks[0];
@@ -414,7 +372,7 @@ function generate(o){
   // main blooms: gather several clear spots, then take the one that best evens out left and right
   function spotMain(n,i,fr,r){const[a0,a1]=sh.a,area=Math.PI*r*r,oks=[];let best=null,bs=-1;
     for(let tr=0;tr<140&&oks.length<8;tr++){const th=rng.range(a0,a1);
-      const rho=sh.env(th)*sc*rng.range(fr[0],fr[1]),x=B.x+rho*Math.sin(th*D2R),y=B.y-rho*Math.cos(th*D2R);
+      const rho=reach(th,rng.range(fr[0],fr[1])),x=B.x+rho*Math.sin(th*D2R),y=B.y-rho*Math.cos(th*D2R);
       let m=Infinity;for(const p of placed){const q=Math.hypot(p.x-x,p.y-y)/(p.r+r)/(p.main?MAIN_K:.8);if(q<m)m=q}
       if(m>=1)oks.push({x,y,th,rho});else if(m>bs){bs=m;best={x,y,th,rho}}}
     if(oks.length){best=oks.reduce((b,c)=>Math.abs(bal+area*(c.x-axis))<Math.abs(bal+area*(b.x-axis))?c:b);best.ok=true}
@@ -424,9 +382,8 @@ function generate(o){
 
   // 1 · focal
   const bf=fl.bloom||1;
-  // TWEAK which flowers can be the focal bloom (delete a name to exclude it) · range(46,54) = main bloom radius in px.
   const focalForm=rng.pick(['peony','ranunculus','anemone']),nF=rng.pick(fl.focal),FR=rng.range(46,54)*sc*bf;
-  const fth=sh.focal.t+rng.range(-4,4),frho=sh.env(fth)*sc*sh.focal.f;
+  const fth=sh.focal.t+rng.range(-4,4),frho=reach(fth,sh.focal.f);
   const fpos=[{th:fth,rho:frho,r:FR}];
   const polar=(th,rho)=>({x:B.x+rho*Math.sin(th*D2R),y:B.y-rho*Math.cos(th*D2R)});
   // a pair is a dominant bloom plus a smaller partner on one side; a trio flanks it on both
@@ -435,7 +392,9 @@ function generate(o){
   const swing=(s,rho,r,gap,from=12)=>{let off=from;while(off<70){const q=polar(fth+s*off,rho);if(Math.hypot(q.x-m0.x,q.y-m0.y)>=(FR+r)*gap)break;off+=1}return fth+s*off};
   const side=rng.pick([-1,1]);
   // full: the partner sits high on one side; the small bloom sits low on the other, diagonally across from it
-  const fromMain=(ang,dist)=>{const x=m0.x+Math.cos(ang*D2R)*dist,y=m0.y+Math.sin(ang*D2R)*dist;return{th:Math.atan2(x-B.x,B.y-y)/D2R,rho:Math.hypot(x-B.x,B.y-y)}};
+  const fromMain=(ang,dist)=>{let dx=Math.cos(ang*D2R),dy=Math.sin(ang*D2R);
+    if(sh.stand){dx*=sh.stand.x;dy*=sh.stand.y;const l=Math.hypot(dx,dy);dx/=l;dy/=l}
+    const x=m0.x+dx*dist,y=m0.y+dy*dist;return{th:Math.atan2(x-B.x,B.y-y)/D2R,rho:Math.hypot(x-B.x,B.y-y)}};
   // full: a triangle, never a line. The partner sits level with or just below the main bloom on one side;
   // the small one sits lower on the other side. Angles are measured below horizontal.
   // The angle at the main bloom stays 75–95°, and the small one sits nearly as far out as the partner,
@@ -461,7 +420,8 @@ function generate(o){
       // It lands in one consistent pocket: 12–24° below level, 1.5–1.7 main-radii out.
       const t=rng.r(),e=12+12*t,dist=FR*(1.5+.2*t);
       fpos.push({...fromMain(s>0?e:180-e,dist),r,back:true,tag:'lowSmall'});continue}
-    const rho=frho*(up?rng.range(1.1,1.18):rng.range(.84,.9));fpos.push({th:swing(s,rho,r,.6,4),rho,r,back:true})}
+    // light: the small bloom stands fully clear of the main one, every shape. Elsewhere it tucks behind.
+    const rho=frho*(up?rng.range(1.1,1.18):rng.range(.84,.9));fpos.push({th:swing(s,rho,r,o.flush==='light'?1.06:.6,4),rho,r,back:true})}
   // heavy: one more smaller bloom just under the main one, filling the gap between the two lower partners
   // (otherwise the group reads as a wide, pointed triangle). It tries angles from 65° to 115° below
   // horizontal and takes the one furthest from the partners.
@@ -471,6 +431,19 @@ function generate(o){
       const sc2=Math.min(m,1)+k*.15; /* clear of every other focal bloom first, then as far out from the main as allowed */
       if(sc2>bm){bm=sc2;best=c}}
     fpos.push({...best,r,back:true})}
+  // tall spray (every flush): lift the focal group up the column. The main bloom rises 2.5–3 main-radii;
+  // smaller blooms rise less, in proportion to (size ÷ main size)^0.6, so a partner rises ~85% as far, a small bloom ~75%.
+  if(o.shape==='spray'){const lift=FR*rng.range(2.5,3)*(o.flush==='sprig'?.35:1); // sprig: only a little higher
+    fpos.forEach(p=>{const q=polar(p.th,p.rho),x=q.x,y=q.y-lift*Math.pow(p.r/FR,.6);p.th=Math.atan2(x-B.x,B.y-y)/D2R;p.rho=Math.hypot(x-B.x,B.y-y)});
+    // a bigger bloom below rises further than the small one above it and can catch up and cover it; nudge the small one up until clear
+    fpos.filter(p=>p.tag==='lowSmall').forEach(p=>{for(let k=0;k<40;k++){const q=polar(p.th,p.rho);
+      const hit=fpos.some(o=>o!==p&&!o.back&&o!==fpos[0]&&Math.hypot(...Object.values(polar(o.th,o.rho)).map((v,i)=>v-[q.x,q.y][i]))<(o.r+p.r)*.92);
+      if(!hit)break;const y=q.y-4;p.th=Math.atan2(q.x-B.x,B.y-y)/D2R;p.rho=Math.hypot(q.x-B.x,B.y-y)}});
+    // likewise the main bloom can rise past a small bloom tucked above it; keep at most ~40% of it hidden.
+    // In a light tall spray there's room to spare, so the small bloom sits fully clear with a little gap.
+    const mq=polar(fpos[0].th,fpos[0].rho),clearK=o.flush==='light'?1.06:.6;
+    fpos.filter(p=>p.back&&p.tag!=='lowSmall').forEach(p=>{for(let k=0;k<60;k++){const q=polar(p.th,p.rho);
+      if(Math.hypot(q.x-mq.x,q.y-mq.y)>=(FR+p.r)*clearK)break;const y=q.y-4;p.th=Math.atan2(q.x-B.x,B.y-y)/D2R;p.rho=Math.hypot(q.x-B.x,B.y-y)}})}
   const nFocal=fpos.length;
   // centre the focal group: slide it sideways so its weight sits on the main bloom's line, not off to one side
   axis=m0.x;
@@ -480,14 +453,11 @@ function generate(o){
   fpos.forEach(p=>weigh(polar(p.th,p.rho).x,Math.PI*p.r*p.r*(p.back?.5:1)));
   fpos.forEach((p,i)=>{const x=B.x+p.rho*Math.sin(p.th*D2R),y=B.y-p.rho*Math.cos(p.th*D2R);
     placed.push({x,y,r:p.back?p.r*.55:p.r,main:!p.back});
-    // TWEAK .12 = how much deeper the small tucked-behind focal blooms are coloured.
     items.push({role:'focal',form:focalForm,tag:p.tag,x,y,th:p.th,rho:p.rho,R:p.r,col:p.back?{...S.key,hex:mix(S.key.hex,deepOf(S.key),.12)}:S.key,fam:'key',z:p.back?2.8:4+(i?0:.5),back:!!p.back})});
   // 2 · line
-  // TWEAK which spires appear · next line: [.96,1.07] = how far out they sit (fraction of the shape's reach) · range(20,25) = spire size.
   const lineForm=rng.pick(['larkspur','veronica']),lineCol=S.support;
   for(let i=0;i<fl.line;i++){const p=spot(fl.line,i,[.96,1.07],16,.9),R=rng.range(20,25)*sc;weigh(p.x,R*R*5);items.push({role:'line',form:lineForm,...p,R,col:lineCol,fam:'support',z:1})}
   // 3 · secondary
-  // TWEAK which flowers can be secondary blooms · below: radius per flower (tulip 22-26, daisy 19-23, cosmos 24-29) · [.44,.88] = where they may sit.
   const secPlan=rng.pick(fl.sec),forms=[...['cosmos','tulip','daisy']].sort(()=>rng.r()-.5);
   const nSec=secPlan.reduce((a,b)=>a+b,0);let si=0;
   secPlan.forEach((cnt,vi)=>{const form=forms[vi];
@@ -498,60 +468,79 @@ function generate(o){
       for(let shrink=0;shrink<4;shrink++){p=spotMain(nSec,i0,[.44,.88],R);if(p.ok)break;R*=.92}
       const c=col||(j%2?S.keyLight:S.support);items.push({role:'secondary',form,...p,R,col:c,fam:c===S.support?'support':'key',z:3})}});
   // 4 · accent
-  // TWEAK which accents appear · range(10,13) = size · [.76,.99] = where they may sit.
   const accForm=rng.pick(['berries','buds','forgetme']);
   for(let i=0;i<fl.accent;i++){const R=rng.range(10,13)*sc,p=spot(fl.accent,i,[.76,.99],11,.9,0,R*R*2.2);items.push({role:'accent',form:accForm,...p,R,col:S.accent,fam:'accent',z:2.5})}
   // 5 · filler
-  // TWEAK which fillers appear · .65 = chance the filler is white rather than coloured · range(20,26) = size · [.62,.95] = where it may sit.
   const filForm=rng.pick(['breath','yarrow']),filCol=rng.chance(.65)?null:(rng.chance(.5)?S.support:S.keyLight);
   for(let i=0;i<fl.filler;i++){const R=rng.range(20,26)*sc,p=spot(fl.filler,i,[.62,.95],20,.55,0,R*R*.9);items.push({role:'filler',form:filForm,...p,R,col:filCol,fam:filCol?(filCol===S.support?'support':'key'):'neutral',z:2})}
-  // 6 · greenery (placed first in the drawing, last in the code: it doesn't collide)
-  // TWEAK which greenery appears (two kinds are picked per bouquet) · range(.8,1.03) = how far out it reaches.
+  // 5b · flower sprays: thin stems that branch at the tip into small blossoms, reaching out around the edge
+  for(let i=0;i<(fl.wisps||0);i++){const R=rng.range(13,16)*sc,p=spot(fl.wisps,i,[.8,1.02],R,.5);
+    const c=rng.weighted([null,S.keyLight,S.accent],[.5,.25,.25]);
+    items.push({role:'wisp',form:'sprays',...p,R,col:c,fam:c===S.accent?'accent':c?'key':'neutral',z:2.4})}
+  // 6 · fill: tuck small sprigs into the biggest gaps first, so the bouquet reads full rather than spotty.
+  // Each round tries 40 spots and takes the roomiest one, favouring spots near the main bloom so the support
+  // gathers closely around the focal group (like a florist packing the centre); it stops when no gap is left.
+  const mainF=items.find(i=>i.role==='focal');
+  const fillCap={sprig:8,light:22,full:70,heavy:80}[o.flush],tinyCol={...S.support,hex:mix(S.support.hex,'#FFFFFF',.35)};
+  for(let n=0;n<fillCap;n++){let best=null,bc=-Infinity;
+    for(let c=0;c<40;c++){const[a0,a1]=sh.a,ff=rng.range(.08,.97),th=rng.range(a0,a1)*(ff<.28?.6:1),rho=reach(th,ff);
+      const x=B.x+rho*Math.sin(th*D2R),y=B.y-rho*Math.cos(th*D2R);
+      let clear=Infinity;for(const p of placed)clear=Math.min(clear,Math.hypot(p.x-x,p.y-y)-p.r);
+      const score=clear-.09*Math.hypot(x-mainF.x,y-mainF.y);
+      if(clear>=(fl.wisps?8:12)*sc&&score>bc){bc=score;best={x,y,th,rho,low:ff<.28}}}
+    if(!best)break;
+    const{x,y,th,rho}=best,r=11*sc,form=best.low?'leaves':rng.weighted(['breath','tiny','leaves'],[.4,.35,.25]); /* low among the stems: foliage only */
+    placed.push({x,y,r});
+    items.push({role:'fill',form,x,y,th,rho,R:form==='breath'?14*sc:form==='tiny'?9*sc:r,col:form==='tiny'?tinyCol:null,z:2.2})}
+  // 7 · greenery (placed first in the drawing, last in the code: it doesn't collide)
   const gForms=[rng.pick(['fern','eucalyptus','willow'])];gForms.push(rng.pick(['fern','eucalyptus','willow'].filter(f=>f!==gForms[0])));
-  for(let i=0;i<fl.green;i++){const[a0,a1]=sh.a,th=a0-8+(a1-a0+16)*(i+rng.r())/fl.green,rho=sh.env(th)*sc*rng.range(.8,1.03);
+  for(let i=0;i<fl.green;i++){const[a0,a1]=sh.a,th=a0-8+(a1-a0+16)*(i+rng.r())/fl.green,rho=reach(th,rng.range(...(sh.greenReach||[.8,1.03])));
     items.push({role:'greenery',form:gForms[i%2],x:B.x+rho*Math.sin(th*D2R),y:B.y-rho*Math.cos(th*D2R),th,rho,z:0})}
+  // 8 · drapes: short greenery that arcs up and out from the binding, then dips down at the tip (one each side)
+  {const sides=fl.drapes?[-1,1]:[];for(const sd of sides){const[a0,a1]=sh.a,edge=sd<0?a0:a1,th=edge*.85,base=reach(th,rng.range(.38,.5));
+    const c0={x:B.x+base*Math.sin(th*D2R)*1.15,y:B.y-base*Math.cos(th*D2R)*1.05};
+    const end={x:c0.x+sd*rng.range(55,95)*sc,y:c0.y+rng.range(30,60)*sc};
+    items.push({role:'drape',form:rng.pick(gForms),x:end.x,y:end.y,th:Math.atan2(end.x-B.x,B.y-end.y)/D2R,rho:Math.hypot(end.x-B.x,B.y-end.y),
+      preset:{b0:{x:B.x+rng.range(-5,5),y:B.y},c0,end},z:.5})}}
 
   // colour balance: area by family, then one recolour if the accent is starved
-  // TWEAK area weights behind the colour balance bar (tulip .7 and daisy .6 of a full circle).
-  const area=it=>it.role==='focal'||it.role==='secondary'?Math.PI*it.R*it.R*(it.form==='tulip'?.7:it.form==='daisy'?.6:1):it.role==='line'?it.R*it.R*5:it.role==='accent'?it.R*it.R*2.2:it.role==='filler'?it.R*it.R*.9:0;
+  const area=it=>it.role==='focal'||it.role==='secondary'?Math.PI*it.R*it.R*(it.form==='tulip'?.7:it.form==='daisy'?.6:1):it.role==='line'?it.R*it.R*5:it.role==='accent'?it.R*it.R*2.2:it.role==='filler'?it.R*it.R*.9:it.role==='wisp'?it.R*it.R*1.2:0;
   const share=()=>{const t={key:0,support:0,accent:0,neutral:0};items.forEach(it=>{if(it.fam)t[it.fam]+=area(it)});const s=Object.values(t).reduce((a,b)=>a+b,0);for(const k in t)t[k]/=s;return t};
   let shares=share(),recolour=false;
-  // TWEAK .06 = accent share below which one secondary bloom is recoloured in the accent colour.
   if(shares.accent<.06){const secs=items.filter(i=>i.role==='secondary').sort((a,b)=>b.rho-a.rho);
     if(secs.length>=5&&S.accent.id!=='fern-accent'){secs[0].col=S.accent;secs[0].fam='accent';recolour=true;shares=share()}}
 
   // stems
   const stems=[],cuts=[];
-  items.forEach(it=>{const bx=B.x+rng.range(-7,7),b0={x:bx,y:B.y};
+  items.forEach(it=>{if(it.preset){Object.assign(it,it.preset);it.tilt=0;return}
+    const bx=B.x+rng.range(-7,7),b0={x:bx,y:B.y};
     const end=it.form==='tulip'?{x:it.x,y:it.y+it.R*.5}:{x:it.x,y:it.y};
-    // TWEAK stem curve: where the bend sits (.15-.35 of the way across, .5-.65 of the way up).
     const c0={x:bx+(end.x-bx)*rng.range(.15,.35),y:B.y-(B.y-end.y)*rng.range(.5,.65)};
     it.b0=b0;it.c0=c0;it.end=end;it.tilt=clampUp(qtan(b0,c0,end,1)+90);
     if(cuts.length<14)cuts.push(bx)});
 
-  const order={greenery:0,stem:0,line:1,filler:2,accent:2.5,secondary:3,focal:4};
-  // TWEAK animation start time per role, in ms. range(0,350) two lines down = random stagger.
-  const delayBase={greenery:0,line:500,filler:900,accent:1500,secondary:1000,focal:1250};
+  const order={greenery:0,drape:.5,stem:0,line:1,filler:2,fill:2.2,wisp:2.4,accent:2.5,secondary:3,focal:4};
+  const delayBase={greenery:0,drape:150,line:500,filler:900,fill:1100,wisp:1300,accent:1500,secondary:1000,focal:1250};
   let stemSvg='',body=[];
   items.forEach((it,i)=>{const dl=delayBase[it.role]+Math.round(rng.range(0,350));
+    if(it.role==='drape'){body.push({z:.5,rho:it.rho,s:`<g class="grow" style="--d:${dl}ms" data-role="drape" data-form="${it.form}">${greenery(it.b0,it.c0,it.end,rng,it.form,a=>Math.max(-165,Math.min(165,a)))}</g>`});return}
     if(it.role==='greenery'){body.push({z:0,rho:it.rho,s:`<g class="grow" style="--d:${dl}ms" data-role="greenery" data-form="${it.form}">${greenery(it.b0,it.c0,it.end,rng,it.form)}</g>`});return}
-    // TWEAK stem thickness: .6 for filler, .95 for everything else.
-    stemSvg+=`<path class="stem" pathLength="1" style="--d:${Math.max(0,dl-450)}ms" d="${d`M${it.b0.x} ${it.b0.y}Q${it.c0.x} ${it.c0.y} ${it.end.x} ${it.end.y}`}" fill="none" stroke="${G.fern}" stroke-width="${it.role==='filler'?.6:.95}" stroke-linecap="round"/>`;
-    // TWEAK leaf on big-bloom stems: .45 = chance · petalD(26,4.5) = length and half-width in px · 38/-38 = angle.
+    stemSvg+=`<path class="stem" pathLength="1" style="--d:${Math.max(0,dl-450)}ms" d="${d`M${it.b0.x} ${it.b0.y}Q${it.c0.x} ${it.c0.y} ${it.end.x} ${it.end.y}`}" fill="none" stroke="${G.fern}" stroke-width="${it.role==='fill'||it.role==='wisp'?.5:it.role==='filler'?.6:.95}" stroke-linecap="round"/>`;
     if((it.role==='focal'||it.role==='secondary')&&rng.chance(.45)){const t=rng.range(.4,.55),p=qpt(it.b0,it.c0,it.end,t),a=qtan(it.b0,it.c0,it.end,t);
       stemSvg+=P(petalD(26,4.5,'point'),mix(G.sage,G.fern,.4),G.stem,.45,'leaf',`translate(${f2(p.x)} ${f2(p.y)}) rotate(${f2(clampUp(a+90+(rng.chance(.5)?38:-38)))})`)}
     let inner;
     if(it.role==='line'){body.push({z:1,rho:it.rho,s:`<g class="grow" style="--d:${dl}ms" data-role="line" data-form="${it.form}" data-colour="${it.col.name}">${spike(it.b0,it.c0,it.end,it.R,it.col,rng,it.form)}</g>`});return}
-    if(it.role==='filler')inner=filler(it.x,it.y,it.R,it.col,rng,it.form,it.tilt);
+    if(it.role==='wisp'){body.push({z:2.4,rho:it.rho,s:`<g class="grow" style="--d:${dl}ms" data-role="wisp"${it.col?` data-colour="${it.col.name}"`:''}>${wisp(it.b0,it.c0,it.end,it.R,it.col,rng)}</g>`});return}
+    if(it.role==='fill')inner=it.form==='breath'?filler(it.x,it.y,it.R,null,rng,'breath',it.tilt)
+      :it.form==='tiny'?`<g transform="translate(${f2(it.x)} ${f2(it.y)}) rotate(${f2(it.tilt*.5)})">${accentHead(it.R,it.col,rng,'forgetme')}</g>`
+      :[-28,0,28].map(o=>P(petalD(it.R*1.5,it.R*.38,'point'),mix(G.sage,G.fern,rng.range(0,.6)),G.stem,.4,'leaf',`translate(${f2(it.x)} ${f2(it.y)}) rotate(${f2(clampUp(it.tilt+o+rng.range(-8,8)))})`)).join('');
+    else if(it.role==='filler')inner=filler(it.x,it.y,it.R,it.col,rng,it.form,it.tilt);
     else if(it.role==='accent')inner=`<g transform="translate(${f2(it.x)} ${f2(it.y)}) rotate(${f2(it.tilt*.6)})">${accentHead(it.R,it.col,rng,it.form)}</g>`;
-    // TWEAK tilt and squash: .45 / .9 = how much face-on / side-view heads lean with their stems · scale(1 .86) = perspective squash of face-on heads.
     else{const td=TOPDOWN.has(it.form);inner=`<g transform="translate(${f2(it.x)} ${f2(it.y)}) rotate(${f2(it.tilt*(td?.45:.9))})${td?' scale(1 .86)':''}">${HEADS[it.form](it.R,it.col,rng)}</g>`}
-    body.push({z:it.back?2.8:order[it.role],rho:it.rho,s:`<g class="${it.role==='filler'?'grow':'open'}" style="--d:${dl}ms" data-role="${it.role}" data-form="${it.form}"${it.col?` data-colour="${it.col.name}"`:''}>${inner}</g>`})});
+    body.push({z:it.back?2.8:order[it.role],rho:it.rho,s:`<g class="${it.role==='filler'||it.role==='fill'?'grow':'open'}" style="--d:${dl}ms" data-role="${it.role}" data-form="${it.form}"${it.col?` data-colour="${it.col.name}"`:''}>${inner}</g>`})});
   body.sort((a,b)=>a.z-b.z||b.rho-a.rho);
 
-  // TWEAK cut stems below the ribbon: *3 = splay · range(60,74) = length.
   let cutSvg='';cuts.forEach(bx=>{const ex=B.x+(bx-B.x)*3+rng.range(-3,3),ey=B.y+rng.range(60,74);cutSvg+=`<path d="${d`M${bx} ${B.y}L${ex} ${ey}`}" stroke="${G.fern}" stroke-width="1.1" stroke-linecap="butt" fill="none"/>`});
-  // TWEAK ribbon colours: rb = fill, rbd = outline. The paths below are the band, two tails and two loops.
   const rb='#8BA0D2',rbd='#4E66A3';
   const ribbon=`<g data-role="ribbon" transform="translate(${B.x} ${B.y+4})">`
     +P('M-15 -7L15 -7L14 7L-14 7Z',rb,rbd,.6,'ribbon')
@@ -564,10 +553,9 @@ function generate(o){
   let x0=B.x-60,x1=B.x+60,y0=B.y,y1=B.y+84;
   items.forEach(it=>{const p=it.end||it,pad=it.role==='greenery'?16:it.role==='line'?14:(it.R||12)+4;
     x0=Math.min(x0,p.x-pad);x1=Math.max(x1,p.x+pad);y0=Math.min(y0,p.y-pad)});
-  // TWEAK picture shape: 1.2 = width/height (6:5), in three places on this line.
   {const half=Math.max(B.x-x0,x1-B.x)+10;let w=half*2,h=y1-y0+16;if(w/h<1.2)w=h*1.2;else h=w/1.2;
    x0=B.x-w/2;y0=y1-h+8;x1=w;y1=h}
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${f2(x0)} ${f2(y0)} ${f2(x1)} ${f2(y1)}" role="img" aria-label="Generated bouquet, ${o.seed}">`
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${f2(x0)} ${f2(y0)} ${f2(x1)} ${f2(y1)}" stroke-opacity=".55" role="img" aria-label="Generated bouquet, ${o.seed}">`
     +`<g data-layer="cut-stems">${cutSvg}</g>`
     +body.filter(b=>b.z===0).map(b=>b.s).join('')
     +`<g data-layer="stems">${stemSvg}</g>`
@@ -581,16 +569,17 @@ function generate(o){
   const oddDetail=(nFocal%2===0||nFocal>1?['line','secondary','accent','filler']:['focal','line','secondary','accent','filler']).flatMap(r=>Object.values(tally(r)).map(v=>v.n));
   const used=[S.key,S.support,S.accent];let clash=null;for(let i=0;i<3;i++)for(let j=i+1;j<3;j++)if(clashes(used[i],used[j]))clash=[used[i].name,used[j].name];
   const fMain=items.find(i=>i.role==='focal');const secR=items.filter(i=>i.role==='secondary').map(i=>i.R);
-  const maxLine=Math.max(...items.filter(i=>i.role==='line').map(i=>i.rho)),maxOther=Math.max(...blooms.filter(i=>i.role!=='line').map(i=>i.rho));
-  const maxTilt=Math.max(...items.map(i=>Math.abs(i.tilt||i.th)));
+  /* how far out a flower sits within the shape at its own angle: 0 = where the shape begins, 1 = its outline */
+  const outF=it=>{const k=sc*(fl.reach||1),n=(sh.near?sh.near(it.th):0)*k,e=sh.env(it.th)*k;return(it.rho-n)/(e-n)};
+  const maxLine=Math.max(...items.filter(i=>i.role==='line').map(outF)),maxOther=Math.max(...items.filter(i=>i.role==='focal'||i.role==='secondary').map(outF));
+  const maxTilt=Math.max(...items.filter(i=>i.role!=='drape').map(i=>Math.abs(i.tilt||i.th))); /* drapes dip on purpose */
   const mains=items.filter(i=>(i.role==='focal'&&!i.back)||i.role==='secondary');let worst=0;
   for(let i=0;i<mains.length;i++)for(let j=i+1;j<mains.length;j++){const a=mains[i],b=mains[j];worst=Math.max(worst,1-Math.hypot(a.x-b.x,a.y-b.y)/(a.R+b.R))}
-  // TWEAK rule thresholds. These only change the pass/miss report, not the drawing.
   const checks=[
     {ok:oddDetail.every(n=>n%2===1),t:nFocal>1?'Odd numbers per variety (focal group excepted)':'Odd numbers per variety',v:oddDetail.join(' · ')},
     {ok:!clash,t:'No banned colour pairs',v:clash?clash.join(' with '):'none used'},
-    {ok:Math.max(...secR)<fMain.R&&Math.abs(fMain.th)<15,t:'Largest bloom central',v:`${Math.round(fMain.R)} vs ${Math.round(Math.max(...secR))} px`},
-    {ok:maxLine>=maxOther*.98,t:'Line flowers set the outline',v:`${Math.round(maxLine)} vs ${Math.round(maxOther)} px reach`},
+    {ok:Math.max(...secR)<fMain.R&&Math.abs(fMain.th)<(sh===SHAPES.hogarth?22:15),t:'Largest bloom central',v:`${Math.round(fMain.R)} vs ${Math.round(Math.max(...secR))} px`},
+    {ok:maxLine>=maxOther,t:'Line flowers set the outline',v:`line flowers reach ${Math.round(maxLine*100)}% of the outline, main blooms ${Math.round(maxOther*100)}%`},
     {ok:shares.accent>=.04&&shares.accent<=.16,t:'Accent near a tenth',v:Math.round(shares.accent*100)+'%'},
     ...(nFocal===3?(()=>{const[A,Bf,Cf]=items.filter(i=>i.role==='focal');
       const corner=(P,Q,R)=>Math.round(Math.abs(((Math.atan2(Q.y-P.y,Q.x-P.x)-Math.atan2(R.y-P.y,R.x-P.x))/D2R+540)%360-180));
@@ -604,7 +593,6 @@ function generate(o){
 }
 
 /* ---------- UI ---------- */
-// TWEAK starting options, and the first seed two lines down.
 const state={seed:'',harmony:'any',key:'any',shape:'posy',flush:'full',animate:false};
 try{const h=decodeURIComponent(location.hash.slice(1));if(/^[a-z0-9-]{1,40}$/i.test(h))state.seed=h}catch(e){}
 if(!state.seed)state.seed='larkspur-417';
@@ -636,7 +624,6 @@ function openLightbox(){if(lb)return;
     tx=w<=innerWidth?(innerWidth-w)/2:Math.min(0,Math.max(innerWidth-w,tx));
     ty=h<=innerHeight?(innerHeight-h)/2:Math.min(0,Math.max(innerHeight-h,ty));
     pan.style.transform=`translate(${tx}px,${ty}px) scale(${s})`}
-  // TWEAK lightbox: 8 = max zoom · two lines down, .0018 (wheel) and .01 (pinch) = zoom speed · 2.5 = double-click zoom.
   function zoomAt(ns,cx,cy){ns=Math.max(minS(),Math.min(8,ns));tx=cx-(cx-tx)*ns/s;ty=cy-(cy-ty)*ns/s;s=ns;clamp()}
   ty=(innerHeight-baseH())/2;clamp();
   box.addEventListener('wheel',e=>{e.preventDefault();zoomAt(s*Math.exp(-e.deltaY*(e.ctrlKey?.01:.0018)),e.clientX,e.clientY)},{passive:false});
@@ -684,7 +671,10 @@ function render(animate){
       <li><span><b>Focal</b> · ${T('focal')} <span class="why">at the visual centre</span></span></li>
       <li><span><b>Secondary</b> · ${T('secondary')} <span class="why">ringing the focal</span></span></li>
       <li><span><b>Filler</b> · ${T('filler')} <span class="why">softens the gaps</span></span></li>
+      <li><span><b>Fill</b> · ${T('fill')||'none needed'} <span class="why">tucked into what's left</span></span></li>
       <li><span><b>Accent</b> · ${T('accent')} <span class="why">the last tenth</span></span></li>
+      ${T('wisp')?`<li><span><b>Sprays</b> · ${T('wisp')} <span class="why">reaching out around the edge</span></span></li>`:''}
+      ${T('drape')?`<li><span><b>Drapes</b> · ${T('drape')} <span class="why">dipping over the binding</span></span></li>`:''}
     </ol>
     ${r.recolour?`<p class="note">The accent came in under 6%, so the outermost secondary bloom was recoloured in ${S.accent.name}.</p>`:''}
     ${misses.length?`<p class="note miss">This posy misses ${misses.length===1?'one rule':misses.length+' rules'}: ${misses.map(c=>c.t.toLowerCase()).join('; ')}. Details in the method below.</p>`:''}`;
@@ -699,11 +689,11 @@ function render(animate){
   r.checks.forEach(c=>{const li=document.querySelector(`.method li[data-rule="${KEY(c.t)}"] .live`);if(!li)return;
     li.innerHTML+=`<span class="${c.ok?'ok':'no'}" title="${c.t}"><span aria-label="${c.ok?'passes':'misses'} on this posy">${c.ok?'✓':'✗'}</span> ${c.v}</span>`});
   const rr=rngFrom(state.seed+'/sisters');
-  // TWEAK number of sister posies: length:6 (also the CSS grid columns and the "Six more" label).
   $('thumbs').innerHTML=Array.from({length:6},()=>freshSeed(rr.r)).map(s=>{const g=generate({...state,seed:s});return`<button class="thumb" data-seed="${s}" aria-label="Use bouquet ${s}">${g.svg}<span>${s}</span></button>`}).join('');
 }
 $('thumbs').addEventListener('click',e=>{const b=e.target.closest('.thumb');if(b){state.seed=b.dataset.seed;render(true);$('stage').scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'})}});
 render(false);
 </script>
 
-</body></html>
+</body>
+</html>
